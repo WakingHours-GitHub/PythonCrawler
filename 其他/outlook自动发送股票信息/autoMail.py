@@ -3,7 +3,6 @@
 import win32com.client as win32 # 直接导入win32 API
 import datetime
 
-
 def autoSend(message):
     print("调用")
     now_day = datetime.datetime.now().strftime("%m.%d") # 获取时间信息
@@ -23,3 +22,4 @@ def autoSend(message):
     mail.Body = message  # 邮件正文
 
     mail.Send() # 发送邮件
+
