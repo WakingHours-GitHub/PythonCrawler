@@ -70,3 +70,12 @@ for a_it in alist:
     subresp.close() # 关闭流; # 不停的请求,
 
 resp.close() # 关闭;
+
+
+"""
+pycharm会对文件进行一个索引. 以加快使用时的存储速度.
+于是我们对文件夹右键, 然后mark directory as ... 选择: Excluded
+这样Pycharm索引时就不包括其中的文件夹. 
+
+
+"""
