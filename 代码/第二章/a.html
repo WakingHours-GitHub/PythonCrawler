@@ -1,0 +1,42 @@
+
+/*
+html 基础:
+<h1>i love you</h1> // 这是标签, 默认左对其
+<h1 align="center">i don't love you</h1>
+// h1是标签
+// align: 属性
+// center: 属性值
+
+html的基本语法类型:
+<标签 属性="属性值">被标记的内容</标签>
+<标签 />
+
+例如:
+<a href="http://www.baidu.com">周杰伦</a> // 一个道理
+
+我们想要插入图片怎么办:
+<img src="[pash].jpg"/>
+<br /> // 这些都是自动闭合的, 不需要另一个闭合标签
+
+*/
+
+
+
+
+
+
+
+
+<div id="1" class="h1">周杰伦</div>
+<div id="2" class="h1">林俊杰</div>
+<div id="3" class="h1">麻花藤</div>
+<div id="4" class="h1">天老鸭</div>
+<div id="5" class="h4">李多海</div>
+<div id="5" class="h5">厉害多</div>
+<span>xxxxx</span>
+
+# 通过标签名称来拿到数据
+# div -> id:3  => 麻花藤
+# div -> class:h4  => 李多海 (因为id=5有两个)
+# 因为页面源代码中,html中的属性不同,以及标签名不同,实际上我们能够通过这种方案定位到元素的
+# 这就是bs4方式
