@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 # 更新时间是否要精确的时间, 如果为True保留时间, 如果False则只保留年月日
 IS_TIME = False
 
-ATTENTION_LIST = ["黑龙江", "北京"]
+ATTENTION_LIST = ["黑龙江"]
 
 
 def get_charset(resp) -> str:
