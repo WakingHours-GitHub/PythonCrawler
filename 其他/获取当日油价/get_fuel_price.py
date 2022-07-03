@@ -5,29 +5,29 @@ from bs4 import BeautifulSoup
 # 更新时间是否要精确的时间, 如果为True保留时间, 如果False则只保留年月日
 IS_TIME = False
 
-ATTENTION_LIST = ["黑龙江"]
+ATTENTION_LIST = ["黑龙江", "北京"]
 
 
 def get_charset(resp) -> str:
-    return re.compile('<meta.*?charset=(?P<charset>.*?) .*?/>', re.S).search(resp.text).group("charset").strip().strip(
-        '"')
+    return re.compile('<meta.*?charset=(?P<charset>.*?) .*?/>', re.S).search(resp.text).group("charset").strip().strip('"')
 
 
 def get_oil_price() -> list:
-
     today_oil_price = [["region", "#92", "#95", "#98", "update date"]]
 
     url = "http://youjia.chemcp.com/index.asp"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36 Edg/103.0.1264.37",
     }
+    # 请求
     resp = requests.get(url, headers=headers)
-    resp.encoding = get_charset(resp)
-    source_page = resp.text
+    resp.encoding = get_charset(resp) #  指定编码
+    source_page = resp.text #  页面源代码
+    # 交给bs4进行解析.
     bs_page = BeautifulSoup(source_page, "html.parser")
     # 定位到国内油价的盒子
     county_oil_box_page = bs_page.find("div", class_="cpbaojia")
-    table_trs = county_oil_box_page.find_all("tr")
+    table_trs = county_oil_box_page.find_all("tr") # zho
     head_list = table_trs[0].text.split("\n")[1:-1]
     for tr in table_trs[1:]:
         area_list = tr.text.split("\n")[1:-1]

@@ -3,41 +3,67 @@ import smtplib
 from email.mime.text import MIMEText
 from email.message import EmailMessage
 
-SENDER = "WakingHoursHUC@outlook.com"
-PASSWD = "sdbevmkehgntrrvf"
+SENDER = "RemoteSender@outlook.com"
+PASSWD = open("passwd.txt").read()
+# print(PASSWD)
 RECEIVER = ["WakingHoursHUC@outlook.com"]
 
-def conversation(data:list) -> str:
-    return f"""
+
+def conversation(data: list) -> str:
+    result_str = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        h1 {
+            text-align: center;
+            align-items: center;
+            align-content: center;
+        }
+
+        table {
+            border: 2px red solid;
+            font-size: 20px;
+            align-content: center;
+            align-items: center;
+            text-align: center;
+
+
+        }
+    </style>
 </head>
 <body>
-    <table style="border: 2px red; font-size: 30px">
-        <tr>
-            <td>{data[0][0]}</td>
-            <td>{data[0][1]}</td>
-            <td>{data[0][2]}</td>
-            <td>{data[0][3]}</td>
-            <td>{data[0][4]}</td>
-        </tr>
-        <tr>
-            <td>{data[1][0]}</td>
-            <td>{data[1][1]}</td>
-            <td>{data[1][2]}</td>
-            <td>{data[1][3]}</td>
-            <td>{data[1][4]}</td>
-        </tr>
-
-    </table>
-</body>
-</html>
+<h1>今天油价！</h1>
+<table cellpadding="10" align="center">
+    <tr>
+        <td>region</td>
+        <td>#92</td>
+        <td>#95</td>
+        <td>#98</td>
+        <td>update date</td>
+    </tr>
+    
     """
-
-
+    end_str = """
+</table>
+</body>
+</html>"""
+    len(data)
+    for i in range(len(data))[1:]:
+        result_str += f"""
+    <tr>
+        <td>{data[i][0]}</td>
+        <td>{data[i][1]}</td>
+        <td>{data[i][2]}</td>
+        <td>{data[i][3]}</td>
+        <td>{data[i][4]}</td>
+    </tr>
+        """
+    result_str += end_str
+    print(result_str)
+    return result_str
 
 
 def send_email(message: str, type: str) -> None:
@@ -53,6 +79,7 @@ def send_email(message: str, type: str) -> None:
         smtp.login(SENDER, PASSWD)
         smtp.send_message(email)
     print("OK")
+
 
 if __name__ == '__main__':
     # print(conversation(get_oil_price()))
