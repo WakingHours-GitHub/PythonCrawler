@@ -62,7 +62,7 @@ def conversation(data: list) -> str:
     </tr>
         """
     result_str += end_str
-    print(result_str)
+    # print(result_str)
     return result_str
 
 
