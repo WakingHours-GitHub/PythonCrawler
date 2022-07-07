@@ -1,4 +1,4 @@
-# Scrapy settings for first_spider project
+# Scrapy settings for first project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,10 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'first_spider'
+BOT_NAME = 'first'
 
-SPIDER_MODULES = ['first_spider.spiders']
-NEWSPIDER_MODULE = 'first_spider.spiders'
+SPIDER_MODULES = ['first.spiders']
+NEWSPIDER_MODULE = 'first.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -50,13 +50,13 @@ RANDOMIZE_DOWNLOAD_DELAY=True # 随机延迟
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'first_spider.middlewares.FirstSpiderSpiderMiddleware': 543,
+#    'first.middlewares.FirstSpiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'first_spider.middlewares.FirstSpiderDownloaderMiddleware': 543,
+#    'first.middlewares.FirstSpiderDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -68,7 +68,7 @@ RANDOMIZE_DOWNLOAD_DELAY=True # 随机延迟
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'first_spider.pipelines.FirstSpiderPipeline': 300,
+#    'first.pipelines.FirstSpiderPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)

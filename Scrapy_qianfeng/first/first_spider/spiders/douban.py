@@ -1,8 +1,12 @@
+import sys
+
 import scrapy
 # 导入Selector对象
 from scrapy import Selector
 
-from Scrapy_qianfeng.first_spider.first_spider.items import MovieItem
+
+# sys.path.extend(r"D:\PyCharm\pythonCrawlers\\")
+# from first.first_spider.items import MovieItem
 
 """
 启动蜘蛛程序:
@@ -12,6 +16,7 @@ from Scrapy_qianfeng.first_spider.first_spider.items import MovieItem
     scrapy crawl douban -o douban.csv 
     
 """
+
 
 class DoubanSpider(scrapy.Spider):
     name = 'douban'
@@ -30,11 +35,13 @@ class DoubanSpider(scrapy.Spider):
         # 返回的仍然是是一个Selector对象
         list_items = sel.css("#content > div > div.article > ol > li")
         for list_item in list_items:
-            movie_item = MovieItem()
+
+            movie_item = MovieItem
+
 
             # list_item.css("span.title::text") # 返回的仍然是一个选择器对象, 因此我们需要抽取其中的内容
             movie_item['title'] = list_item.css('span.title::text').extract_first()
-            movie_item['rank'] = list_item.css('span.rating)num::text').extract_first()
+            movie_item['rank'] = list_item.css('span.rating_snum::text').extract_first()
             movie_item['subject'] = list_item.css('span.inq::text').extract_first()
 
             # 到这, 我们的数据就已经组装好了, 组装到我们的item对象中了.
