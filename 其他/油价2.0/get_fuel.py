@@ -38,7 +38,7 @@ class SpiderFuelPrices():
         table_b4_page = div_bs_page.find("table")
         region_fuel_price_list = table_b4_page.text.split("\n\n") # 按行切割.
         region_fuel_price_list = [ele.strip().split("\n") for ele in region_fuel_price_list if ele != '']
-        print(region_fuel_price_list)
+        # print(region_fuel_price_list)
         header = region_fuel_price_list[0] # 拿到header头
         selected_region = list()
         for region in region_fuel_price_list:

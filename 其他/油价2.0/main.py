@@ -47,7 +47,10 @@ def main() -> None:
     # return
 
     # 自动解包.
-    header, region_selected = SpiderFuelPrices().start_spider()
+    header, region_selected = SpiderFuelPrices().start_spider() # 开启爬虫
+    print(header)
+
+    print(region_selected)
     # print(header)
     # print(region_selected)
 
@@ -64,7 +67,7 @@ def main() -> None:
 
 
     if not is_repetition: # repetition
-        print("fuel price updating") # 油价正在更新
+        print("oil price updating") # 油价正在更新
 
         f_split = lambda x: x.split('\n')[1: ] # 要1到最后. 不要
         # 此时*_content已经是列表类型了. 经过split
@@ -75,9 +78,22 @@ def main() -> None:
         for old_data, new_data in zip(read_content, write_content):
             # print(content) # ('黑龙江,8.39,8.99,10.20,2022/8/23 13:28:50', '黑龙江,8.39,8.99,10.20,2022/8/23 13:28:59')
             # calculate price different(change)
-            price_change_92 = new_data[1] - old_data[1]
-            price_change_95 = new_data[2] - old_data[2]
-            price_change_98 = new_data[3] - old_data[3]
+            new_data = new_data.split(',')
+            old_data = old_data.split(',')
+            price_change = list()
+            for i in range(1, 4):
+                price_change.append(float(new_data[i]) - float(old_data[i]))
+            # price_change_92 = float(new_data[1]) - float(old_data[1])
+            # price_change_95 = float(new_data[2]) - float(old_data[2])
+            # price_change_98 = float(new_data[3]) - float(old_data[3])
+
+            # (..._data\[.*?\])
+            # float($1) 注意, 这里是使用$作为取分组的应用
+
+            for index, value in zip(range(2, 7, 2), price_change):
+                region_selected.insert(index, value)
+
+            print(region_selected)
 
 
 
