@@ -68,11 +68,14 @@ def main() -> None:
 
     if not is_repetition: # repetition
         print("oil price updating") # 油价正在更新
+        k = 0
 
-        f_split = lambda x: x.split('\n')[1: ] # 要1到最后. 不要
+        f_split = lambda x: x.split('\n')[1: ] # 要1到最后. 不要head
         # 此时*_content已经是列表类型了. 经过split
+        # 去除head
         read_content = f_split(read_content)
         write_content = f_split(write_content)
+
         # 计算每一行(每一行表示一个地区)的差价
         # calculate price change of each row where represent a different region
         for old_data, new_data in zip(read_content, write_content):
@@ -89,11 +92,14 @@ def main() -> None:
 
             # (..._data\[.*?\])
             # float($1) 注意, 这里是使用$作为取分组的应用
+            print(list(range(2, 7, 2)), price_change)
 
+            # 这块有点不完美, 暂时没有想到好的解决方案.
             for index, value in zip(range(2, 7, 2), price_change):
-                region_selected.insert(index, value)
+                region_selected[k].insert(index, value.__str__())
 
             print(region_selected)
+            k += 1
 
 
 
