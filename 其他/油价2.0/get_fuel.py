@@ -22,7 +22,7 @@ class SpiderFuelPrices():
     def get_charset(self) -> str:
         """获取网页的charset, 解决乱码"""
         return re.findall(
-            '<meta http-equiv="Content-Type" content="text/html; charset=(.*?)" />',
+            '<meta .*? charset=(.*?)" />',
             self.response.text,
             re.S
         )[0]
