@@ -8,13 +8,16 @@ from email.mime.text import MIMEText
 from get_fuel import SpiderFuelPrices
 
 SENDER = "RemoteSender@outlook.com"  # 发送邮箱
-PASSWD = open("passwd.txt").read()  # 读取密码.
+with open("passwd.txt") as f:
+    PASSWD = f.read()  # 读取密码.
+
 RECEIVER = ["WakingHoursHUC@outlook.com"]  # 接收邮箱
 gc.collect()  # 垃圾回收
 
 
 def construct_message(region_selected_information: list[list,]) -> str:
     # 数据格式: [['黑龙江', '8.23', '-0.160', '8.82', '-0.170', '10.00', '-0.200', '2022/8/24 15:48:49']]
+    print(region_selected_information)
     head = """
 <!DOCTYPE html>
 <html lang="en">
@@ -71,11 +74,12 @@ def construct_message(region_selected_information: list[list,]) -> str:
         </tr>"""
     for region in region_selected_information:
         print(region)
-        content.format(region[0], region[1], region[2], region[3], region[4], region[5], region[6], region[7])
+        # 拼接字符串
+        head += content.format(region[0], region[1], region[2], region[3], region[4], region[5], region[6], region[7])
 
-    message = head + content + end
+    message = head + end
     print(message)
-    return "test"
+    return message
 
     # pass
 
@@ -85,11 +89,11 @@ def send_email(region_selected: list[list]) -> None:
     print(region_selected)
     # 创建message
     message = construct_message(region_selected)
-    return
+
     # 构建消息主题 -> 使用HTML创建消息主题
     email = MIMEText(message, 'html', 'utf-8')  # 创建消息对象.
     email['From'] = SENDER
-    email['To'] = RECEIVER
+    email['To'] = ','.join(RECEIVER)
     email['Subject'] = 'Today Oil Price'  # 主题
 
     # 开启smtp进行发送
